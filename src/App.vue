@@ -1,18 +1,28 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+    <formulario-twitter/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FormularioTwitter from './components/FormularioTwitter.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    FormularioTwitter
+  },
+  data: () => ({
+  form: {
+    nombre: '',
+    apellido: '',
+    edad: '',
+    email: '',
+    cursos: [],
+    beca: ''
   }
+ }),
 }
 </script>
 
