@@ -234,7 +234,7 @@ export default {
   }),
   methods:{
     emitFormulario(){
-      console.log("formulario enviado", this.form);
+      //console.log("formulario enviado", this.form);
       this.$emit('submit-formulario',this.form);
       this.resetFormulario();
     },
