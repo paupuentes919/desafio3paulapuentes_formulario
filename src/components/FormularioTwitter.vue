@@ -35,11 +35,135 @@
                     required
                 >
               </div>
-
+              <div class="col col-2">
+                <h4 class="typo-input">1 - Estaciones</h4>
+                <div class="row-questions">
+                  <div class="form-check">
+                    <input
+                      type="radio"
+                      name="Team Verano"
+                      class="form-check-input"
+                      value="Team Verano"
+                      v-model="form.estacion"
+                    >
+                    <label for="Team Verano" class="typo-input-questions">Team Verano</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      type="radio"
+                      name="Team Invierno"
+                      class="form-check-input"
+                      value="Team Invierno"
+                      v-model="form.estacion"
+                    >
+                    <label for="TeamInvierno" class="typo-input-questions">Team Invierno</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col col-2">
+                <h4 class="typo-input">2 - Pan Dulce</h4>
+                <div class="row-questions">
+                  <div class="form-check">
+                    <input
+                      type="radio"
+                      name="Con Chocolate"
+                      class="form-check-input"
+                      value="Con Chocolate"
+                      v-model="form.pandulce"
+                    >
+                    <label for="Con Chocolate" class="typo-input-questions">Con Chocolate</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      type="radio"
+                      name="Con Frutas Abrillantadas"
+                      class="form-check-input"
+                      value="Con Frutas Abrillantadas"
+                      v-model="form.pandulce"
+                    >
+                    <label for="Con Frutas Abrillantadas" class="typo-input-questions">Con Frutas Abrillantadas</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col col-2">
+                <h4 class="typo-input">3 - Papel Higienico</h4>
+                <div class="row-questions">
+                  <div class="form-check">
+                    <input
+                      type="radio"
+                      name="Cuelga por delante"
+                      class="form-check-input"
+                      value="Cuelga por delante"
+                      v-model="form.papelhigienico"
+                    >
+                    <label for="Cuelga por delante" class="typo-input-questions">Cuelga por delante</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      type="radio"
+                      name="Cuelga por detras"
+                      class="form-check-input"
+                      value="Cuelga por detras"
+                      v-model="form.papelhigienico"
+                    >
+                    <label for="Cuelga por detras" class="typo-input-questions">Cuelga por detras</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col col-2">
+                <h4 class="typo-input">4 - Cual es la opción correcta de "Dos Cero Dos Cuatro" (Valido varias opciones) ?</h4>
+                <div class="row-questions">
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      id="2024"
+                      class="form-check-input"
+                      value="2024"
+                      v-model="form.numeros"
+                    >
+                    <label for="2024" class="typo-input-questions">2024</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      id="0044"
+                      class="form-check-input"
+                      value="0044"
+                      v-model="form.numeros"
+                    >
+                    <label for="0044" class="typo-input-questions">0044</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      id="0024"
+                      class="form-check-input"
+                      value="0024"
+                      v-model="form.numeros"
+                    >
+                    <label for="0024" class="typo-input-questions">0024</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      id="2044"
+                      class="form-check-input"
+                      value="2044"
+                      v-model="form.numeros"
+                    >
+                    <label for="2044" class="typo-input-questions">2044</label>
+                  </div>
+                </div>
+              </div>        
+              <div class="row">
+                  <h4 class="typo-input">5 - El Mate con qué va acompañado?</h4>
+                  <select>
+                    <option value="" selected></option>
+                    <option class="typo-input-questions" v-for="op in form.listaOpciones" :value="op.opcion" :key="op.opcion" >{{ op.opcion}}</option>
+                  </select>
+              </div>
             </div>
-
-        </div>
-      
+        </div>   
     </form>
   </div>
 </template>
@@ -53,8 +177,33 @@ export default {
         apellido: '',
         edad: '',
         email: '',
-        cursos: [],
-        beca: ''
+        estacion: '',
+        pandulce: '',
+        papelhigienico:'',
+        numeros: [],
+        opcionSeleccionada: "",
+        listaOpciones: [
+                {
+                    id: 1,
+                    opcion: 'Churros'
+                },
+                {
+                    id: 2,
+                    opcion: 'Facturas'
+                },
+                {
+                    id: 3,
+                    opcion: 'Bizcochitos'
+                },
+                {
+                    id: 4,
+                    opcion: 'Galletitas'
+                },
+                {
+                    id: 5,
+                    opcion: 'Tortitas negras'
+                },
+            ],        
     }
     }),
 }
@@ -89,6 +238,13 @@ label {
     font-size: 25px;
     margin-bottom: 1rem;
 }
+.typo-input-questions{
+  font-family: 'Fredoka One', cursive;
+    font-size: 25px;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+
+}
 .grid-fields{
   display: flex;
   justify-content: center;
@@ -102,6 +258,10 @@ input{
 }
 .form-control{
   margin-bottom: 3rem;
+}
+.row-questions{
+  display: flex;
+  justify-content: center;
 }
 
 </style>

@@ -2,27 +2,22 @@
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <formulario-twitter/>
+    <formulario-clase/> 
   </div>
 </template>
 
 <script>
+//import Formulario from './components/Formulario.vue'
 import FormularioTwitter from './components/FormularioTwitter.vue'
+import FormularioClase from './components/FormularioClase.vue'
 
 export default {
   name: 'App',
   components: {
-    FormularioTwitter
-  },
-  data: () => ({
-  form: {
-    nombre: '',
-    apellido: '',
-    edad: '',
-    email: '',
-    cursos: [],
-    beca: ''
-  }
- }),
+    FormularioTwitter,
+    FormularioClase
+},
+ 
 }
 </script>
 
