@@ -58,12 +58,12 @@
                     <br>
                     <div class="row">
                         <select data-style="btn-danger" class="form-select form-select-lg mb-3"
-                            aria-label="Default select example" v-model="pais">
+                            aria-label="Default select example" v-model="paises">
                             <option value="" selected></option>
                             <option v-for="pais in listaPaises" :value="pais.pais" :key="pais.id" >{{ pais.pais }}</option>
                         </select>
                     </div>
-                    <div class="text-success">Pais: {{ pais }}</div>
+                    <div class="text-success">Pais: {{ paises }}</div>
 
                     <br>
                     <label for="areaComentarios" class="form-label text-start">Comentarios</label>
@@ -141,7 +141,7 @@ export default {
                 isValid: false
             },
             chequeados:[],
-            pais: "",
+            paises: "",
             listaPaises: [
                 {
                     id: 'A',

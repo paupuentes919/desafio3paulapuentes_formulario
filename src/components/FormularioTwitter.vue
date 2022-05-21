@@ -1,6 +1,6 @@
 <template> 
   <div class="container">
-    <form @submit.prevent="emitForm"> <!--Hago el envio del form y pongo prevent para que no se refresque la pagina-->
+    <form @submit.prevent="emitFormulario"> <!--Hago el envio del form y pongo prevent para que no se refresque la pagina-->
         <div class="row">
             <div class="col col-12">
                 <img class="twitter-image" alt="Vue logo" src="../assets/twitter.png">
@@ -173,13 +173,19 @@
               </div>        
               <div class="row">
                   <h4 class="typo-input">5 - El Mate con qué va acompañado?</h4>
-                  <select>
+                  <select v-model="form.opcionSeleccionada">
                     <option value="" selected></option>
-                    <option class="typo-input-questions" v-for="op in form.listaOpciones" :value="op.opcion" :key="op.opcion" >{{ op.opcion}}</option>
+                    <option class="typo-input-questions" v-for="op in listaOpciones" :value="op.opcion" :key="op.opcion" >{{ op.opcion}}</option>
                   </select>
               </div>
             </div>
-        </div>   
+        </div> 
+        <div class="submit">
+          <input
+            type="submit"
+            class="btn-submit"
+            value="ENVIAR">
+        </div>  
     </form>
   </div>
 </template>
@@ -196,8 +202,14 @@ export default {
         pandulce: '',
         papelhigienico:'',
         numeros: [],
-        opcionSeleccionada: "",
-        listaOpciones: [
+        opcionSeleccionada: '',
+    },
+    validar:{
+      nombre: '',
+      edad: '',
+      email: ''
+    },
+    listaOpciones: [
                 {
                     id: 1,
                     opcion: 'Churros'
@@ -219,14 +231,13 @@ export default {
                     opcion: 'Tortitas negras'
                 },
             ],        
-    },
-    validar:{
-      nombre: '',
-      edad: '',
-      email: ''
-    }
   }),
   methods:{
+    emitFormulario(){
+      console.log("formulario enviado", this.form);
+      this.$emit('submit-formulario',this.form);
+      this.resetFormulario();
+    },
     validarNombre(){
       let regexNombre =/[a-zA-Z]{2,}\s+[a-zA-Z]{2,}/ // [] -- un rango posible de caracteres | [a-zA-Z] -- Cualquier letra en mayúsculas o minúsculas | {2,} -- el caracter aparece al menos 2 veces | \s -- espacio
     
@@ -251,11 +262,24 @@ export default {
     
       if (this.form.email && regexEmail.test(this.form.email)){
         this.validar.email = ''; 
-        console.log("entro");
       }
       else{
         this.validar.email = 'Por favor, ingrese un mail valido'
       }
+    },
+    resetFormulario(){
+       this.form.nombre = '';
+       this.form.edad = '';
+       this.form.email = '';
+       this.form.estacion = '';
+       this.form.pandulce = '';
+       this.form.papelhigienico = '';
+       this.form.numeros = [];
+       this.form.opcionSeleccionada = '',
+       this.validar.nombre = '';
+       this.validar.edad = '';
+       this.validar.email = '';
+    
     }
   }, 
 }
@@ -320,6 +344,16 @@ input{
   font-size: small;
   margin-top: -3rem;
   margin-bottom: 2rem;
+}
+.submit{
+  margin-top: 10rem;
+}
+.btn-submit{
+  font-family: 'Fredoka One', cursive;
+  font-size: 30px;
+  width: 20rem;
+  height: 5rem;
+  background: rgb(62, 171, 207);
 }
 
 </style>
