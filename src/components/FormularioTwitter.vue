@@ -7,34 +7,50 @@
                 <h3 class="twitter-typo">Censo 2022 - twitter</h3>
                 <h5 class="twitter-typo-description">La encuesta que nadie pidió pero que todos querían</h5>
               <div class="grid-fields">
-                <label for="inputNombre" class="typo-input">Nombre Completo</label>
+                <!------------------------------ NOMBRE COMPLETO ------------------------------>
+                <label for="inputNombre" class="typo-input">Nombre Completo
+                  <span v-if="!validar.nombre && form.nombre">✅</span> 
+                </label>
                 <input
                     type="text"
-                    class="form-control"
                     id="inputNombre"
+                    class="form-control"
                     placeholder="Nombre Completo"
                     v-model="form.nombre"
+                    @keyup="validarNombre"
                     required
                 >
-                <label for="inputEdad" class="typo-input">Edad</label>
+                <span v-if="validar.nombre" class="warning">{{validar.nombre}}</span>
+                <!------------------------------------ EDAD ----------------------------------->
+                <label for="inputEdad" class="typo-input">Edad
+                   <span v-if="!validar.edad && form.edad">✅</span> 
+                </label>
                 <input
                     type="text"
                     class="form-control"
                     id="inputEdad"
                     placeholder="Edad"
                     v-model="form.edad"
+                    @keyup="validarEdad"
                     required
                 >
-                <label for="inputEmail" class="typo-input">Email</label>
+                <span v-if="validar.edad" class="warning">{{validar.edad}}</span>
+                <!------------------------------------ EMAIL ---------------------------------->
+                <label for="inputEmail" class="typo-input">Email
+                  <span v-if="!validar.email && form.email">✅</span> 
+                </label>
                 <input
                     type="text"
                     class="form-control"
                     id="inputEmail"
                     placeholder="email@email.com"
-                    v-model="form.mail"
+                    v-model="form.email"
+                    @keyup="validarEmail"
                     required
                 >
+                <span v-if="validar.email" class="warning">{{validar.email}}</span>
               </div>
+              <!------------------------------------ ENCUESTA ----------------------------------->
               <div class="col col-2">
                 <h4 class="typo-input">1 - Estaciones</h4>
                 <div class="row-questions">
@@ -174,7 +190,6 @@ export default {
   data: () => ({
     form: {
         nombre: '',
-        apellido: '',
         edad: '',
         email: '',
         estacion: '',
@@ -204,8 +219,45 @@ export default {
                     opcion: 'Tortitas negras'
                 },
             ],        
+    },
+    validar:{
+      nombre: '',
+      edad: '',
+      email: ''
     }
-    }),
+  }),
+  methods:{
+    validarNombre(){
+      let regexNombre =/[a-zA-Z]{2,}\s+[a-zA-Z]{2,}/ // [] -- un rango posible de caracteres | [a-zA-Z] -- Cualquier letra en mayúsculas o minúsculas | {2,} -- el caracter aparece al menos 2 veces | \s -- espacio
+    
+      if (this.form.nombre && regexNombre.test(this.form.nombre)){
+        this.validar.nombre = ''; 
+      }
+      else{
+        this.validar.nombre = 'Por favor, ingrese su nombre completo'
+      }
+    }, 
+    validarEdad(){   
+      let regexEdad = /[0-9]/
+      if (this.form.edad && regexEdad.test(this.form.edad)){
+        this.validar.edad = ''; 
+      }
+      else{
+        this.validar.edad = 'Por favor, ingrese un numero'
+      }
+    },
+    validarEmail(){
+      let regexEmail =/[\w._%+-]+@[\w.-]+\.[a-zA-Z]{2,4}/ 
+    
+      if (this.form.email && regexEmail.test(this.form.email)){
+        this.validar.email = ''; 
+        console.log("entro");
+      }
+      else{
+        this.validar.email = 'Por favor, ingrese un mail valido'
+      }
+    }
+  }, 
 }
 </script>
 
@@ -262,6 +314,12 @@ input{
 .row-questions{
   display: flex;
   justify-content: center;
+}
+.warning{
+  color: red;
+  font-size: small;
+  margin-top: -3rem;
+  margin-bottom: 2rem;
 }
 
 </style>
