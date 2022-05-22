@@ -268,18 +268,20 @@ export default {
       }
     },
     resetFormulario(){
-       this.form.nombre = '';
-       this.form.edad = '';
-       this.form.email = '';
-       this.form.estacion = '';
-       this.form.pandulce = '';
-       this.form.papelhigienico = '';
+      //  this.form.nombre = '';
+      //  this.form.edad = '';
+      //  this.form.email = '';
+      //  this.form.estacion = '';
+      //  this.form.pandulce = '';
+      //  this.form.papelhigienico = '';
+      //  this.form.numeros = [];
+      //  this.form.opcionSeleccionada = '',
+      //  this.validar.nombre = '';
+      //  this.validar.edad = '';
+      //  this.validar.email = '';
+
+       Object.keys(this.form).forEach(key => this.form[key] = '');
        this.form.numeros = [];
-       this.form.opcionSeleccionada = '',
-       this.validar.nombre = '';
-       this.validar.edad = '';
-       this.validar.email = '';
-    
     }
   }, 
 }
@@ -319,7 +321,6 @@ label {
     font-size: 25px;
     margin-bottom: 1rem;
     margin-right: 1rem;
-
 }
 .grid-fields{
   display: flex;
@@ -338,6 +339,7 @@ input{
 .row-questions{
   display: flex;
   justify-content: center;
+  margin-bottom: 5rem;
 }
 .warning{
   color: red;
@@ -355,5 +357,4 @@ input{
   height: 5rem;
   background: rgb(62, 171, 207);
 }
-
 </style>

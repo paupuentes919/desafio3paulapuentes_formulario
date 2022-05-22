@@ -1,37 +1,34 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <formulario-twitter
       @submit-formulario="registroUsuarios"/>
-    <!-- <formulario-clase/>  -->
+    <tabla-usuarios v-if="usuarios.length != 0"
+      :usuarios="usuarios"/>
   </div>
 </template>
 
 <script>
-//import Formulario from './components/Formulario.vue'
+
 import FormularioTwitter from './components/FormularioTwitter.vue'
-// import FormularioClase from './components/FormularioClase.vue'
+import TablaUsuarios from './components/TablaUsuarios.vue';
 
 export default {
   name: 'App',
   components: {
     FormularioTwitter,
-    // FormularioClase
+    TablaUsuarios  
   },
   data:() => ({
     usuarios: []
-
   }),
   methods:{
-    registroUsuarios(form){
-      let nuevoUsuario = {...form};
+    registroUsuarios(formulario){
+      let nuevoUsuario = {...formulario};
       this.usuarios.push(nuevoUsuario);
-      console.log("veo lo que llega",this.usuarios);
     }
   }
 }
  
-
 </script>
 
 <style>
